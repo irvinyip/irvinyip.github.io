@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PockeyPay Calculator</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">PockeyPay Calculator</h1>
+        <div class="form-group">
+            <label for="schoolDays">School Days:</label>
+            <input type="number" class="form-control" id="schoolDays" placeholder="Enter School Days">
+        </div>
+        <button class="btn btn-primary" onclick="calculateTotal()">Calculate Total</button>
+        <div class="result" id="totalAmount"></div>
+        <div class="form-group">
+            <label for="formulaDisplay">Formula and Used Values:</label>
+            <textarea class="form-control" id="formulaDisplay" rows="8" readonly></textarea>
+        </div>
+    </div>
+
+    <script>
+        const masters = {
+            "bus_17": 6.7,
+            "van": 4.9,
+            "lunch": 60,
+            "snack": 41
+        };
+
+        function calculateTotal() {
+            const schoolDays = parseFloat(document.getElementById('schoolDays').value) || 0;
+
+            const totalAmount = schoolDays * (masters.bus_17 * 2 + masters.van + masters.lunch + masters.snack);
+            const formulaDisplay = document.getElementById('formulaDisplay');
+            formulaDisplay.value = `School Days: ${schoolDays}\nBus 17: ${masters.bus_17} * 2\nVan: ${masters.van}\nLunch: ${masters.lunch}\nSnack: ${masters.snack}\n\nTotal Amount: $${totalAmount.toFixed(2)}`;
+            document.getElementById('totalAmount').textContent = `Total Amount: $${totalAmount.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
